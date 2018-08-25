@@ -61,5 +61,37 @@ light_2=4'b1111;//frog2 win
 end
 end
 
+
+/*
+always@(posedge clk, posedge rst)
+begin
+	if(rst)
+		light_1 <= 4'b0111;
+	else if (die_1!=19'd0)
+		light_1 <= {1'b0,light_1[3:1]};//decrease a light1
+	else if (frog_1==19'b1000000000000000000)
+		light_1 <= 4'b1111;//frog1 win
+	else if (frog_2==19'b1000000000000000000)
+		light_1 <= 4'b0000;//frog1 lose
+	else 
+		light_1 <= light_1;
+end
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //endmodule
 endmodule
