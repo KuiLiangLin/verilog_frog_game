@@ -8,7 +8,7 @@ initial begin
     $display("//==top input : clk, go_1, go_2, back_1, back_2, rst");
     $display("//==top output : outview, light_1, light_2");
     $display("//***************************************");
-    end
+end
 reg clk,go_1,go_2,back_1,back_2,rst;
 wire [17:0]outview;
 wire [3:0]light_1,light_2;
@@ -16,7 +16,7 @@ wire [3:0]light_1,light_2;
 //**************************** module **********************//
 initial begin
     $display("===module : add");
-    end
+end
 ex1 ex1(.clk(clk),
 		.rst(rst),
 		.go_1(go_1),
@@ -33,7 +33,7 @@ initial begin
 	$display("===starting generating clk");
 	force clk = 1'b0;
 	forever #(`CYCLE/2) force clk = ~clk;
-    end
+end
 
 //**************************** initial and wavegen **********************//
 initial begin
@@ -46,8 +46,8 @@ initial begin
     go_1 = 0;
     go_2 = 0;
 	back_1 = 0;
-	back_1 = 2;	
-    end
+	back_2 = 0;	
+end
 
 //**************************** main **********************//
 reg [13:0]index_2;
@@ -55,17 +55,16 @@ initial begin
 
 	RESET;
 
-	for(index_2 = 14'd0; index_2 < 14'd4; index_2 = index_2 + 14'd1) begin 
+/*	for(index_2 = 14'd0; index_2 < 14'd4; index_2 = index_2 + 14'd1) begin 
         #1000;
         $display("send : 0x%h, 0x%h" , index_2, index_2 + 14'd1);
 
         end
-
+*/
 
 	$display("===all done");
 	#10_000_000; $finish;
-    end
-
+end
 
 
 task RESET;
@@ -79,9 +78,5 @@ begin
 end
 endtask
 
-
-
-
-
-
+//endmodule
 endmodule

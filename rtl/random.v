@@ -22,11 +22,9 @@ module random(rst,clk,random_out);
 input clk, rst;
 output reg [13:0]random_out;
 
-
 reg [5:0] counter;
 wire [5:0] temp = {counter[0], counter[5], counter[1], counter[4], counter[2], counter[3]};
 wire [5:0] temp_1 = {counter[1], counter[4], counter[2], counter[3], counter[0], counter[5]};
-
 
 always@(posedge clk, posedge rst)
 begin
@@ -40,7 +38,6 @@ else
 
 end
 
-
 always@(posedge clk, posedge rst)
 begin
 	if(rst) 
@@ -48,9 +45,5 @@ begin
 	else 
 		counter <= counter + 6'd3;
 end
-
-
-
-
-
+//endmodule
 endmodule

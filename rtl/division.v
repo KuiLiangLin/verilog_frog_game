@@ -42,6 +42,5 @@ begin
 	else
 		oclk <= oclk;
 end
-
-
+//endmodule
 endmodule
