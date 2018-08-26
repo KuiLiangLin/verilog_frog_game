@@ -13,13 +13,13 @@ wire go_debounce, back_debounce, reset_posi_debounce;
 //low active
 debounce_low_act debounce_go(.rst(rst), .clk(clk), .in(go), .out(go_debounce));
 debounce_low_act debounce_back(.rst(rst), .clk(clk), .in(back), .out(back_debounce));
-debounce_high_act debounce_reset(.rst(rst), .clk(clk), .in(reset), .out(reset_posi_debounce));
+//debounce_high_act debounce_reset(.rst(rst), .clk(clk), .in(reset), .out(reset_posi_debounce));
 
 always@(posedge clk, posedge rst)
 begin
 	if(rst)
 		state <= 5'b00000;
-	else if (reset_posi_debounce)
+	else if (reset)
 		state <= 5'b00000;
 	else if (!go_debounce)
 		state <= state+5'b00001;
@@ -51,6 +51,7 @@ begin
 		s16:frog <= 19'b0010000000000000000;
 		s17:frog <= 19'b0100000000000000000;
 		s18:frog <= 19'b1000000000000000000;
+		default : frog <= 19'b0000000000000000001;
 	endcase
 end
 //endmodule

@@ -12,9 +12,9 @@ wire oclk;
 reg reset_1,reset_2;//let the frog saturation back to original
 
 division division(oclk, clk, rst);//divided freq. to 1 second
-frogg f1(clk,rst,go_1,back_1,frog_1,reset_1);
-frogg f2(clk,rst,go_2,back_2,frog_2,reset_2);
-random rr1(rst,oclk,random_out);//random 0.5 second
+frogg frogg_1(clk,rst,go_1,back_1,frog_1,reset_1);
+frogg frogg_2(clk,rst,go_2,back_2,frog_2,reset_2);
+random random(rst,oclk,random_out);//random 0.5 second
 
 assign block = {1'b0,random_out[3],1'b0,random_out[7],
 				1'b0,random_out[1],1'b0,random_out[5],
@@ -28,70 +28,47 @@ assign outview = byoutview[17:0];//real output
 
 always@(posedge clk, posedge rst)
 begin
-if(rst==1'b1)
-	begin//initialize
-	light_1 <= 4'b0111;
-	light_2 <= 4'b0111;
-	reset_1 <= 1'b0;
-	reset_2 <= 1'b0;
-	end
-if(die_1!=19'd0)
-	begin//frog1 bomb into block
-	light_1={1'b0,light_1[3:1]};//decrease a light1
-	reset_1=1'b1;//frog1 back to original
-	end
-else if(die_1==19'd0)
-	reset_1=1'b0;//frog1 can go or back
-if(die_2!=19'd0)
-	begin//frog2 bomb into block
-	light_2={1'b0,light_2[3:1]};//decrease a light2
-	reset_2=1'b1;//frog2 back to original
-	end
-else if(die_2==19'd0)
-	reset_2=1'b0;//frog2 can go or back
-if(frog_1==19'b1000000000000000000)
-begin
-light_1=4'b1111;//frog1 win
-light_2=4'b0000;
-end
-if(frog_2==19'b1000000000000000000)
-begin
-light_1=4'b0000;
-light_2=4'b1111;//frog2 win
-end
-end
-
-
-/*
-always@(posedge clk, posedge rst)
-begin
 	if(rst)
 		light_1 <= 4'b0111;
-	else if (die_1!=19'd0)
+	else if(die_1!=19'd0)//bomb into block
 		light_1 <= {1'b0,light_1[3:1]};//decrease a light1
-	else if (frog_1==19'b1000000000000000000)
+	else if(frog_1==19'b1000000000000000000)
 		light_1 <= 4'b1111;//frog1 win
-	else if (frog_2==19'b1000000000000000000)
-		light_1 <= 4'b0000;//frog1 lose
 	else 
 		light_1 <= light_1;
 end
-*/
 
+always@(posedge clk, posedge rst)
+begin
+	if(rst)
+		light_2 <= 4'b0111;
+	else if(die_1!=19'd0)//bomb into block
+		light_2 <= {1'b0,light_2[3:1]};//decrease a light2
+	else if(frog_1==19'b1000000000000000000)
+		light_2 <= 4'b1111;//frog2 win
+	else 
+		light_2 <= light_2;
+end
 
+always@(posedge clk, posedge rst)
+begin
+	if(rst)
+		reset_1 <= 1'b0;
+	else if(die_1!=19'd0)//bomb into block
+		reset_1 <= 1'b1;//frog1 back to original
+	else
+		reset_1 <= 1'b0;//frog1 can go or back
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
+always@(posedge clk, posedge rst)
+begin
+	if(rst)
+		reset_2 <= 1'b0;
+	else if(die_1!=19'd0)//bomb into block
+		reset_2 <= 1'b1;//frog2 back to original
+	else
+		reset_2 <= 1'b0;//frog2 can go or back
+end
 
 //endmodule
 endmodule

@@ -43,24 +43,34 @@ initial begin
 end
 
 initial begin
-    go_1 = 0;
-    go_2 = 0;
-	back_1 = 0;
-	back_2 = 0;	
+    go_1 = 1;
+    go_2 = 1;
+	back_1 = 1;
+	back_2 = 1;	
 end
 
 //**************************** main **********************//
-reg [13:0]index_2;
+//reg [13:0]index_2;
+integer index_2;
 initial begin
 
 	RESET;
-
-/*	for(index_2 = 14'd0; index_2 < 14'd4; index_2 = index_2 + 14'd1) begin 
-        #1000;
-        $display("send : 0x%h, 0x%h" , index_2, index_2 + 14'd1);
-
-        end
-*/
+	#1_000_000;
+	for(index_2 = 1; index_2 <= 17; index_2 = index_2 + 2) begin 
+        //#1000;
+        //$display("send : 0x%h, 0x%h" , index_2, index_2 + 14'd1);
+		$display("%d", index_2);
+		wait(ex1.block[index_2] == 0) begin 
+			force go_1 = 0; 
+			#(`CYCLE*24); 
+			force go_1 = 1; 
+			#(`CYCLE*24);
+			force go_1 = 0; 
+			#(`CYCLE*24); 
+			force go_1 = 1; 
+			#11_000_000;
+		end
+    end
 
 	$display("===all done");
 	#10_000_000; $finish;

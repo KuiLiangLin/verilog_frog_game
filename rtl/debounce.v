@@ -9,11 +9,10 @@ always@(posedge clk, posedge rst)
 begin
 	if(rst)
 		out <= 1'd1;
-	else if (counter == 6'd63)
+	else if (counter == 6'd10)
 		out <= 1'd0; // low active
 	else 
 		out <= 1'd1;
-
 end
 
 always@(posedge clk, posedge rst)
@@ -41,11 +40,10 @@ always@(posedge clk, posedge rst)
 begin
 	if(rst)
 		out <= 1'd0;
-	else if (counter == 6'd63)
+	else if (counter == 6'd10)
 		out <= 1'd1; 
 	else 
 		out <= 1'd0;
-
 end
 
 always@(posedge clk, posedge rst)
