@@ -24,6 +24,10 @@
 
 ![image](https://github.com/KuiLiangLin/verilog_frog_game/blob/master/board_6.jpg)
 
+Altera DE2 70 Board : 
+
+![image](https://github.com/KuiLiangLin/verilog_frog_game/blob/master/Altera_DE2_70_Board.jpg)
+
 Back_1:第一隻青蛙後退一格
 
 Back_2:第二隻青蛙後退一格
