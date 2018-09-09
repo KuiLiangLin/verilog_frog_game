@@ -1,5 +1,9 @@
 # verilog_frog_game
 
+ <em><a href="https://github.com/KuiLiangLin/verilog_frog_game/">View frog game on GitHub</a></em>.
+
+<hr>
+
 我這一個期末專題式作青蛙過河的這一個遊戲,一開始先用手動開關reset,讓遊戲的資料初始化,我的遊戲是有兩隻青蛙可以同時競賽,用18顆LED燈來代表障礙物與青蛙一與青蛙二的位置,每隻青蛙都有三條命,以LED燈亮三顆顯示,若青蛙在過河的時候撞到障礙物則返回原點並且減一條命,以LED少亮一顆顯示,若青蛙度過重重難關過河成功則四顆LED燈都會全亮,代表贏家,
 
 <img src="https://raw.githubusercontent.com/KuiLiangLin/verilog_frog_game/master/board_1.jpg" height="100%" width="100%" >
